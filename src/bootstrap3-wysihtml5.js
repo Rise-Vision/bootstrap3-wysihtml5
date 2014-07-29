@@ -2,6 +2,61 @@
     "use strict";
 
     var tpl = {
+        /* Donna Start */
+        "alignment": function(locale, options) {
+          return "<li>" +
+            "<div class='btn-group'>" +
+              "<button type='button' class='alignment btn btn-default dropdown-toggle' data-toggle='dropdown'>" +
+                "<i class='glyphicons align_left'></i>" +
+                "<span class='caret'>" +
+              "</button>" +
+              "<div class='dropdown-menu' role='menu'>" +
+                "<div class='btn-group'>" +
+                  "<button type='button' class='btn btn-default btn-sm' data-wysihtml5-command='align' data-wysihtml5-command-value='left' tabindex='-1'>" +
+                    "<i class='glyphicons align_left'></i>" +
+                  "</button>" +
+                  "<button type='button' class='btn btn-default btn-sm' data-wysihtml5-command='align' data-wysihtml5-command-value='center' tabindex='-1'>" +
+                    "<i class='glyphicons align_center'></i>" +
+                  "</button>" +
+                  "<button type='button' class='btn btn-default btn-sm' data-wysihtml5-command='align' data-wysihtml5-command-value='right' tabindex='-1'>" +
+                    "<i class='glyphicons align_right'></i>" +
+                  "</button>" +
+                  "<button type='button' class='btn btn-default btn-sm' data-wysihtml5-command='align' data-wysihtml5-command-value='justify' tabindex='-1'>" +
+                    "<i class='glyphicons justify'></i>" +
+                  "</button>" +
+                "</div>" +
+              "</div>" +
+            "</div>" +
+          "</li>";
+        },
+        "font": function(locale, options) {
+          return "<li>" +
+            "<div class='font-picker'>" +
+            "</div>" +
+          "</li>";
+        },
+        "font-size": function(locale, options) {
+          return "<li>" +
+            "<div class='font-size-picker'>" +
+            "</div>" +
+          "</li>";
+        },
+        "text-color": function(locale, options) {
+           return "<li>" +
+            "<input class='text-color' type='color'>" +
+          "</li>";
+        },
+        "highlight-color": function(locale, options) {
+           return "<li>" +
+            "<input class='highlight-color' type='color'>" +
+          "</li>";
+        },
+        "background-color": function(locale, options) {
+           return "<li>" +
+            "<input class='background-color' type='color'>" +
+          "</li>";
+        },
+        /* Donna End */
         "font-styles": function(locale, options) {
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li class='dropdown'>" +
@@ -204,6 +259,46 @@
                     if(key === "image") {
                         this.initInsertImage(toolbar);
                     }
+
+                    /* Donna Start */
+                    if (key === "font") {
+                        this.initFont(toolbar);
+                    }
+
+                    if (key === "font-size") {
+                        this.initFontSize(toolbar);
+                    }
+
+                    if (key === "text-color") {
+                        this.initColorPicker(toolbar, {
+                          elem: '.text-color',
+                          type: 'text',
+                          color: '#000',
+                          command: 'textColor',
+                          attribute: 'data-text-color'
+                        });
+                    }
+
+                    if (key === "highlight-color") {
+                        this.initColorPicker(toolbar, {
+                          elem: '.highlight-color',
+                          type: 'highlight',
+                          color: 'transparent',
+                          command: 'highlightColor',
+                          attribute: 'data-highlight-color'
+                        });
+                    }
+
+                    if (key === "background-color") {
+                        this.initColorPicker(toolbar, {
+                          elem: '.background-color',
+                          type: 'background',
+                          color: '#fff',
+                          command: 'backgroundColor',
+                          attribute: 'data-background-color'
+                        });
+                    }
+                    /* Donna End */
                 }
             }
 
@@ -351,7 +446,40 @@
                     return true;
                 }
             });
-        }
+        },
+
+        /* Donna Start */
+        initFont: function(toolbar) {
+          toolbar.find(".font-picker").fontPicker({});
+            // TODO: No access to self.editor because it hasn't been created yet.
+            // Pass it later after it's available?
+            // toolbar.find(".font-picker").fontPicker({
+            //   "contentDocument": self.editor.composer.iframe.contentDocument
+            // });
+        },
+
+        initFontSize: function(toolbar) {
+            toolbar.find(".font-size-picker").fontSizePicker();
+        },
+
+        initColorPicker: function(toolbar, options) {
+            toolbar.find(options.elem).spectrum({
+              type: options.type,
+              color: options.color,
+              showInput: true,
+              chooseText: "Apply",  // TODO: i18n
+              cancelText: "Cancel", // TODO: i18n
+              change: function(color) {
+                var hexColor = color.toHexString();
+
+                self.editor.composer.commands.exec(options.command, hexColor, [{
+                  name: options.attribute,
+                  value: hexColor
+                }]);
+              },
+            });
+        },
+        /* Donna End */
     };
 
     // these define our public api
@@ -402,6 +530,14 @@
         "link": true,
         "image": true,
         "size": 'sm',
+        /* Donna Start */
+        "alignment": true,
+        "font": true,
+        "font-size": true,
+        "text-color": true,
+        "highlight-color": true,
+        "background-color": true,
+        /* Donna End */
         events: {},
         parserRules: {
             classes: {
@@ -421,7 +557,13 @@
                 "wysiwyg-color-blue" : 1,
                 "wysiwyg-color-teal" : 1,
                 "wysiwyg-color-aqua" : 1,
-                "wysiwyg-color-orange" : 1
+                "wysiwyg-color-orange" : 1,
+                /* Donna Start - Alignment */
+                "wysiwyg-align-left" : 1,
+                "wysiwyg-align-center" : 1,
+                "wysiwyg-align-right" : 1,
+                "wysiwyg-justify" : 1,
+                /* Donna End */
             },
             tags: {
                 "b":  {},
@@ -480,9 +622,11 @@
                 h6: "Heading 6"
             },
             emphasis: {
-                bold: "Bold",
-                italic: "Italic",
-                underline: "Underline"
+                /* Donna Start */
+                bold: "B",
+                italic: "I",
+                underline: "U"
+                /* Donna End */
             },
             lists: {
                 unordered: "Unordered list",
