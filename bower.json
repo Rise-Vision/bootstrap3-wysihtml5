@@ -1,0 +1,31 @@
+{
+  "name": "rv-bootstrap3-wysihtml5",
+  "version": "0.0.3",
+  "main": [
+    "dist/bootstrap3-wysihtml5.min.css",
+    "dist/bootstrap3-wysihtml5.min.js"
+  ],
+  "homepage": "https://github.com/Rise-Vision/bootstrap3-wysihtml5",
+  "authors": [
+    "Donna Peplinskie"
+  ],
+  "description": "Bootstrap 3 compatible WYSIWYG editor",
+  "keywords": [
+    "rise-vision",
+    "bootstrap",
+    "wysiwyg"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "test"
+  ],
+  "dependencies": {
+    "jquery": "1.11.0",
+    "rv-style-guide": "git://github.com/Rise-Vision/style-guide#0.1.0",
+    "wysihtml5": "~0.3.0"
+  }
+}
