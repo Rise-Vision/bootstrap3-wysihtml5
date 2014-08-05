@@ -25,7 +25,7 @@
   ],
   "dependencies": {
     "jquery": "1.11.0",
-    "rv-style-guide": "git://github.com/Rise-Vision/style-guide#0.1.0",
+    "rv-style-guide": "https://github.com/Rise-Vision/style-guide.git",
     "wysihtml5": "~0.3.0"
   }
 }
