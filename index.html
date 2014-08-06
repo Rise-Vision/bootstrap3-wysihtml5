@@ -7,11 +7,22 @@
   <title>bootstrap-wysihtml5</title>
 
   <link rel="stylesheet" href="/components/rv-style-guide/dist/css/rise.min.css" />
+  <link rel="stylesheet" href="/components/widget-settings-ui-components/dist/css/widget-settings-ui-components.css" />
+  <link rel="stylesheet" href="/components/rv-bootstrap-formhelpers/dist/css/rv-bootstrap-formhelpers.css" />
+  <link rel="stylesheet" href="/components/bootstrap-form-components/dist/css/all.css" />
+  <link rel="stylesheet" href="/components/bootstrap-select/bootstrap-select.css" />
+  <link rel="stylesheet" href="/components/spectrum/spectrum.css" />
   <link rel="stylesheet" href="/dist/css/bootstrap3-wysihtml5.css" />
 
   <script src="/components/jquery/dist/jquery.min.js"></script>
   <script src="/components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
-  <script src="/components/wysihtml5/dist/wysihtml5-0.3.0.js"></script>
+  <script src="/components/rv-wysihtml5/dist/wysihtml5-0.4.0pre.js"></script>
+  <script src="/components/widget-settings-ui-components/dist/js/widget-settings-ui-components.js"></script>
+  <script src="/components/rv-bootstrap-formhelpers/dist/js/rv-bootstrap-formhelpers.js"></script>
+  <script src="/components/bootstrap-select/bootstrap-select.js"></script>
+  <script src="/components/bootstrap-form-components/dist/js/bootstrap-font-picker.js"></script>
+  <script src="/components/bootstrap-form-components/dist/js/bootstrap-font-size-picker.js"></script>
+  <script src="/components/spectrum/spectrum.js"></script>
   <script src="/src/js/bootstrap3-wysihtml5.js"></script>
 
   <style type="text/css" media="screen">
@@ -46,7 +57,7 @@
           <a class="btn btn-large btn-primary jumbo" href="https://github.com/schnawel007/bootstrap3-wysihtml5">View project on Github</a>
         </p>
       </div>
-      <div class="span6" >
+      <div class="span6">
         <h2>Usage</h2>
         <p>
           <pre class="prettyprint linenums">$('.textarea').wysihtml5();</pre>
@@ -56,7 +67,13 @@
   </div>
 
   <script>
-    $('.textarea').wysihtml5();
+    $(".textarea").wysihtml5({
+      /* Stylesheets for font picker and alignment. */
+      "stylesheets": [
+        "/components/bootstrap-form-components/dist/css/all.css",
+        "/components/widget-settings-ui-components/dist/css/widget-settings-ui-components.css"
+      ],
+    });
   </script>
 
 </body>
