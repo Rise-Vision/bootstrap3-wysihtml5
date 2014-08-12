@@ -1,4 +1,2 @@
-.DS_Store
-.c9revisions
-/*.project
 components/
+node_modules/
