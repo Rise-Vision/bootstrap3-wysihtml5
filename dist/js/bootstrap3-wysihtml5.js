@@ -18,6 +18,31 @@
             "<div class='font-size-picker'></div>" +
           "</li>";
         },
+        "line-height": function(locale, options) {
+          return "<li>" +
+            "<div class='btn-group'>" +
+              "<button type='button' class='btn btn-default btn-sm dropdown-toggle'" +
+                "data-toggle='dropdown' data-wysihtml5-command-value='1'>" +
+                "<i class='glyphicon glyphicon-text-height'></i>" +
+                "<span class='caret'></span>" +
+              "</button>" +
+              "<ul class='dropdown-menu' role='menu'>" +
+                "<li>" +
+                  "<a data-wysihtml5-command='lineHeight' data-wysihtml5-command-value='1' tabindex='-1'>" + locale.line_height.single + "</a>" +
+                "</li>" +
+                "<li>" +
+                  "<a data-wysihtml5-command='lineHeight' data-wysihtml5-command-value='1-15' tabindex='-1'>1.15</a>" +
+                "</li>" +
+                "<li>" +
+                  "<a data-wysihtml5-command='lineHeight' data-wysihtml5-command-value='1-5' tabindex='-1'>1.5</a>" +
+                "</li>" +
+                "<li>" +
+                  "<a data-wysihtml5-command='lineHeight' data-wysihtml5-command-value='2' tabindex='-1'>" + locale.line_height.double + "</a>" +
+                "</li>" +
+              "</ul>" +
+            "</div>" +
+          "</li>";
+        },
         "text-color": function(locale, options) {
            return "<li>" +
             "<input class='text-color' type='color'>" +
@@ -40,7 +65,7 @@
                 "<a class='btn dropdown-toggle " + size + " btn-default' data-toggle='dropdown' href='#'>" +
                 "<i class='glyphicon glyphicon-font'></i>&nbsp;<span class='current-font'>" + locale.font_styles.normal + "</span>&nbsp;<b class='caret'></b>" +
                 "</a>" +
-                "<ul class='dropdown-menu'>" +
+                "<ul class='dropdown-menu' role='menu'>" +
                 "<li><a data-wysihtml5-command='formatBlock' data-wysihtml5-command-value='div' tabindex='-1'>" + locale.font_styles.normal + "</a></li>" +
                 "<li><a data-wysihtml5-command='formatBlock' data-wysihtml5-command-value='h1' tabindex='-1'>" + locale.font_styles.h1 + "</a></li>" +
                 "<li><a data-wysihtml5-command='formatBlock' data-wysihtml5-command-value='h2' tabindex='-1'>" + locale.font_styles.h2 + "</a></li>" +
@@ -566,6 +591,7 @@
         "alignment": true,
         "font": true,
         "font-size": true,
+        "line-height": true,
         "text-color": true,
         "highlight-color": true,
         "background-color": true,
@@ -688,7 +714,13 @@
                 navy: "Navy",
                 blue: "Blue",
                 orange: "Orange"
+            },
+            /* Donna Start */
+            line_height: {
+                single: "Single",
+                double: "Double"
             }
+            /* Donna End */
         }
     };
 

@@ -27,7 +27,7 @@
     "bootstrap-form-components": "https://github.com/Rise-Vision/bootstrap-form-components.git",
     "jquery": "1.11.0",
     "rv-style-guide": "https://github.com/Rise-Vision/style-guide.git",
-    "rv-wysihtml5": "git://github.com/Rise-Vision/wysihtml5#0.3.2-rv",
-    "widget-settings-ui-components": "git://github.com/Rise-Vision/widget-settings-ui-components"
+    "rv-wysihtml5": "https://github.com/Rise-Vision/wysihtml5.git#0.3.5-rv",
+    "widget-settings-ui-components": "https://github.com/Rise-Vision/widget-settings-ui-components.git"
   }
 }
