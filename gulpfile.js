@@ -11,6 +11,7 @@
 
   var cssFiles = [
     "src/css/bootstrap3-wysihtml5-color.css",
+    "src/css/bootstrap3-wysihtml5-line-height.css",
     "src/css/bootstrap3-wysihtml5.css"
   ];
   var jsFiles = [
@@ -30,11 +31,6 @@
 
   gulp.task("css", function () {
     return gulp.src(cssFiles)
-      .pipe(gulp.dest("dist/css"));
-  });
-
-  gulp.task("css-min", ["css"], function () {
-    return gulp.src("dist/css/*.css")
       .pipe(minifyCSS({ keepBreaks: true }))
       .pipe(rename(function(path) {
         path.basename += ".min";
@@ -44,11 +40,6 @@
 
   gulp.task("js", function () {
     return gulp.src(jsFiles)
-      .pipe(gulp.dest("dist/js"));
-  });
-
-  gulp.task("js-uglify", ["js"], function () {
-    gulp.src("dist/js/*.js")
       .pipe(uglify())
       .pipe(rename(function(path) {
         path.basename += ".min";
@@ -57,7 +48,7 @@
   });
 
   gulp.task("build", function (cb) {
-    runSequence(["clean"], ["css-min", "js-uglify"], cb);
+    runSequence(["clean"], ["css", "js"], cb);
   });
 
   gulp.task("default", ["build"]);
