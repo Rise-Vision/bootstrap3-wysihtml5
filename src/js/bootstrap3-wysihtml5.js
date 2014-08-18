@@ -519,11 +519,13 @@
 
         initColorPicker: function(toolbar, options) {
           toolbar.find(options.elem).spectrum({
-            type: options.type,
+            cancelText: "Cancel",
+            chooseText: "Apply",
             color: options.color,
+            preferredFormat: "hex",
+            showAlpha: true,
             showInput: true,
-            chooseText: "Apply",  // TODO: i18n
-            cancelText: "Cancel", // TODO: i18n
+            type: options.type,
             change: function(color) {
               var hexColor = color.toHexString();
 
