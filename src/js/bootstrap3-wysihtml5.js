@@ -58,9 +58,16 @@
             "<input class='background-color' type='color'>" +
           "</li>";
         },
+        "clear": function(locale, options) {
+           return "<li>" +
+            "<button type='button' class='btn btn-default btn-sm' title='Clear' data-wysihtml5-command='clear'>" +
+              "<span class='glyphicon glyphicon-file'></span>" +
+            "</button>" +
+          "</li>";
+        },
         /* Donna End */
         "font-styles": function(locale, options) {
-            var size = (options && options.size) ? ' btn-'+options.size : '';
+            var size = (options && options.size) ? " btn-" + options.size : "";
             return "<li class='dropdown'>" +
                 "<a class='btn dropdown-toggle " + size + " btn-default' data-toggle='dropdown' href='#'>" +
                 "<i class='glyphicon glyphicon-font'></i>&nbsp;<span class='current-font'>" + locale.font_styles.normal + "</span>&nbsp;<b class='caret'></b>" +
@@ -581,6 +588,7 @@
     $.fn.wysihtml5.Constructor = Wysihtml5;
 
     var defaultOptions = $.fn.wysihtml5.defaultOptions = {
+        "clear": true,
         "font-styles": true,
         "color": false,
         "emphasis": true,
