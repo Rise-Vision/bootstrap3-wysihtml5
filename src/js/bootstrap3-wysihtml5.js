@@ -20,7 +20,7 @@
         },
         "line-height": function(locale, options) {
           return "<li>" +
-            "<div class='btn-group'>" +
+            "<div class='line-height btn-group'>" +
               "<button type='button' class='btn btn-default btn-sm dropdown-toggle'" +
                 "data-toggle='dropdown' data-wysihtml5-command-value='1'>" +
                 "<i class='glyphicon glyphicon-text-height'></i>" +
@@ -28,16 +28,16 @@
               "</button>" +
               "<ul class='dropdown-menu' role='menu'>" +
                 "<li>" +
-                  "<a data-wysihtml5-command='lineHeight' data-wysihtml5-command-value='1' tabindex='-1'>" + locale.line_height.single + "</a>" +
+                  "<a data-wysihtml5-command-value='1' tabindex='-1'>" + locale.line_height.single + "</a>" +
                 "</li>" +
                 "<li>" +
-                  "<a data-wysihtml5-command='lineHeight' data-wysihtml5-command-value='1-15' tabindex='-1'>1.15</a>" +
+                  "<a data-wysihtml5-command-value='1-15' tabindex='-1'>1.15</a>" +
                 "</li>" +
                 "<li>" +
-                  "<a data-wysihtml5-command='lineHeight' data-wysihtml5-command-value='1-5' tabindex='-1'>1.5</a>" +
+                  "<a data-wysihtml5-command-value='1-5' tabindex='-1'>1.5</a>" +
                 "</li>" +
                 "<li>" +
-                  "<a data-wysihtml5-command='lineHeight' data-wysihtml5-command-value='2' tabindex='-1'>" + locale.line_height.double + "</a>" +
+                  "<a data-wysihtml5-command-value='2' tabindex='-1'>" + locale.line_height.double + "</a>" +
                 "</li>" +
               "</ul>" +
             "</div>" +
@@ -335,6 +335,32 @@
                 var el = $(target);
                 self.toolbar.find('.current-color').text(el.html());
             });
+
+            /* Donna Start - Add click event handler for line height. */
+            toolbar.find(".line-height").on("shown.bs.dropdown", function(e) {
+              var el = $(e.target);
+              var lineHeight = el.find("button").data("wysihtml5-command-value");
+
+              // Use short timeout to overcome issue with Bootstrap interfering with this handler.
+              setTimeout(function() {
+                el.find("a[data-wysihtml5-command-value='" + lineHeight + "']").focus();
+              }, 0);
+            });
+
+            // Add click event handler for selecting an individual line height.
+            toolbar.find(".line-height a").click(function(e) {
+              var target = e.target || e.srcElement;
+              var el = $(target);
+              var lineHeight = el.data("wysihtml5-command-value");
+
+              toolbar.find(".line-height button").data("wysihtml5-command-value", lineHeight);
+
+              self.editor.composer.commands.exec("lineHeight", lineHeight, [{
+                name: "data-line-height",
+                value: lineHeight
+              }]);
+            });
+            /* Donna End */
 
             this.el.before(toolbar);
 
