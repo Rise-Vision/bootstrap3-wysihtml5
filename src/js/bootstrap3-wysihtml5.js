@@ -554,6 +554,7 @@
           toolbar.find(options.elem).spectrum({
             cancelText: "Cancel",
             chooseText: "Apply",
+            clickoutFiresChange: true,
             color: options.color,
             preferredFormat: "hex",
             showAlpha: true,
