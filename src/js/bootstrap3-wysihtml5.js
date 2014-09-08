@@ -561,11 +561,12 @@
             showInput: true,
             type: options.type,
             change: function(color) {
-              var hexColor = color.toHexString();
+              var hexString = color.toHexString();
+              var rgb = color.toRgb();
 
-              self.editor.composer.commands.exec(options.command, hexColor, [{
+              self.editor.composer.commands.exec(options.command, hexString, rgb, [{
                 name: options.attribute,
-                value: hexColor
+                value: color.toRgbString()
               }]);
 
               self.editor.focus();
