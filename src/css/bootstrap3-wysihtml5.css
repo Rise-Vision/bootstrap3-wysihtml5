@@ -17,16 +17,9 @@ ul.wysihtml5-toolbar > li {
 	margin: 0 5px 10px 0;
 }
 
-ul.wysihtml5-toolbar a[data-wysihtml5-command=bold] {
-	font-weight: bold;
-}
-
-ul.wysihtml5-toolbar a[data-wysihtml5-command=italic] {
-	font-style: italic;
-}
-
-ul.wysihtml5-toolbar a[data-wysihtml5-command=underline] {
-	text-decoration: underline;
+ul.wysihtml5-toolbar a[data-wysihtml5-command=clear] {
+  background-color: #fff;
+  border-color: #ccc;
 }
 
 ul.wysihtml5-toolbar a.btn.wysihtml5-command-active {

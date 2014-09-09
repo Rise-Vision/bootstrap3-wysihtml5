@@ -59,10 +59,10 @@
           "</li>";
         },
         "clear": function(locale, options) {
-           return "<li>" +
-            "<button type='button' class='btn btn-default btn-sm' title='Clear' data-wysihtml5-command='clear'>" +
+          return "<li>" +
+            "<a class='btn btn-sm btn-default' data-wysihtml5-command='clear' title='Clear' tabindex='-1'>" +
               "<span class='glyphicon glyphicon-file'></span>" +
-            "</button>" +
+            "</a>" +
           "</li>";
         },
         /* Donna End */
