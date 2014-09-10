@@ -1,0 +1,41 @@
+<html>
+<head>
+  <title>WYSIHTML5 - Test Page</title>
+  <link rel="stylesheet" href="/components/common-style/dist/css/rise.min.css">
+  <link rel="stylesheet" href="/components/spectrum/spectrum.css">
+  <link rel="stylesheet" href="/components/rv-bootstrap-formhelpers/dist/css/rv-bootstrap-formhelpers.min.css">
+  <link rel="stylesheet" href="/components/bootstrap-select/bootstrap-select.min.css">
+  <link rel="stylesheet" href="/dist/css/bootstrap3-wysihtml5.min.css">
+  <style>
+</style>
+</head>
+
+<body ng-app="testApp" ng-controller="mainController">
+  <textarea wysihtml5 id="editable" class="form-control" name="editable" stylesheets="stylesheets">
+  </textarea>
+
+  <script src="/components/angular/angular.js"></script>
+  <script src="/components/jquery/dist/jquery.js"></script>
+  <script src="/components/spectrum/spectrum.js"></script>
+  <script src="/components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+  <script src="/components/rv-bootstrap-formhelpers/dist/js/rv-bootstrap-formhelpers.js"></script>
+  <script src="/components/bootstrap-select/bootstrap-select.min.js"></script>
+  <script src="/components/bootstrap-form-components/dist/js/bootstrap-font-picker.js"></script>
+  <script src="/components/bootstrap-form-components/dist/js/bootstrap-font-size-picker.js"></script>
+  <script src="/components/widget-settings-ui-components/dist/js/widget-settings-ui-components.js"></script>
+  <script src="/components/wysihtml5/dist/wysihtml5-0.4.0pre.js"></script>
+  <script src="/dist/js/angular/dtv-bootstrap3-wysihtml5.min.js"></script>
+  <script src="/dist/js/bootstrap3-wysihtml5.min.js"></script>
+
+  <script type="text/javascript">
+    angular.module("testApp", ["risevision.widget.common.wysihtml5"])
+      .controller("mainController", ["$scope", function ($scope) {
+        $scope.stylesheets = [
+          "/components/bootstrap-form-components/dist/css/all.min.css",
+          "/components/common-style/dist/css/alignment.min.css",
+          "/dist/css/bootstrap3-wysihtml5-line-height.min.css"
+        ];
+      }]);
+  </script>
+</body>
+</html>

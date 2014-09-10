@@ -2,6 +2,11 @@
   "name": "rv-bootstrap3-wysihtml5",
   "version": "0.0.3",
   "description": "Bootstrap WYSIWYG Editor",
+  "main": "src/js/bootstrap3-wysihtml5.js",
+  "scripts": {
+    "test": "gulp test",
+    "build": "gulp build"
+  },
   "keywords": [
     "bootstrap",
     "wysiwyg",
@@ -14,12 +19,27 @@
   "license": "MIT",
   "homepage": "http://schnawel007.github.io/bootstrap3-wysihtml5/",
   "devDependencies": {
+    "chai": "^1.9.1",
+    "chai-as-promised": "^4.1.1",
+    "express": "^4.9.0",
     "gulp": "^3.8.7",
     "gulp-bump": "^0.1.11",
     "gulp-clean": "^0.3.1",
     "gulp-minify-css": "^0.3.7",
     "gulp-rename": "^1.2.0",
-    "run-sequence": "^0.3.6",
-    "gulp-uglify": "^0.3.1"
+    "gulp-run-sequence": "^0.3.2",
+    "gulp-uglify": "^0.3.1",
+    "karma": "^0.12.23",
+    "karma-chai": "^0.1.0",
+    "karma-chai-plugins": "^0.2.3",
+    "karma-coverage": "^0.2.6",
+    "karma-jasmine": "^0.1.5",
+    "karma-junit-reporter": "^0.2.2",
+    "karma-mocha": "^0.1.9",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "mocha": "~1.20.1",
+    "phantomjs": "^1.9.7-15",
+    "protractor": "^1.2.0",
+    "widget-tester": "git://github.com/Rise-Vision/widget-tester.git"
   }
 }
