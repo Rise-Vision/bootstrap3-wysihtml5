@@ -60,7 +60,7 @@
         },
         "clear": function(locale, options) {
           return "<li>" +
-            "<a class='btn btn-sm btn-default' data-wysihtml5-command='clear' title='Clear' tabindex='-1'>" +
+            "<a class='clear btn btn-sm btn-default' data-wysihtml5-command='clear' title='Clear' tabindex='-1'>" +
               "<span class='glyphicon glyphicon-file'></span>" +
             "</a>" +
           "</li>";
@@ -616,23 +616,23 @@
     $.fn.wysihtml5.Constructor = Wysihtml5;
 
     var defaultOptions = $.fn.wysihtml5.defaultOptions = {
-        "clear": true,
-        "font-styles": true,
-        "color": false,
-        "emphasis": true,
-        "lists": true,
-        "html": false,
-        "link": true,
-        "image": true,
-        "size": 'sm',
         /* Donna Start */
         "alignment": true,
+        "background-color": true,
+        "clear": true,
+        "color": false,
+        "emphasis": true,
         "font": true,
         "font-size": true,
-        "line-height": true,
-        "text-color": true,
+        "font-styles": false,
         "highlight-color": true,
-        "background-color": true,
+        "html": false,
+        "image": false,
+        "line-height": true,
+        "link": false,
+        "lists": false,
+        "size": 'sm',
+        "text-color": true,
         /* Donna End */
         events: {},
         parserRules: {

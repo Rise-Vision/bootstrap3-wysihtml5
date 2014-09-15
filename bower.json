@@ -23,6 +23,13 @@
     "components",
     "test"
   ],
+  "devDependencies": {
+    "angular": "~1.2.18",
+    "angular-mocks": "1.2.18",
+    "q": "1.0.1",
+    "jquery": "1.11.0",
+    "sinon": "~1.10.2"
+  },
   "dependencies": {
     "bootstrap-form-components": "https://github.com/Rise-Vision/bootstrap-form-components.git",
     "jQuery": "~1.11.1",
