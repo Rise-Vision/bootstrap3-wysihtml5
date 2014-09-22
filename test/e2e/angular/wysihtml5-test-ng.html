@@ -11,7 +11,7 @@
 </head>
 
 <body ng-app="testApp" ng-controller="mainController">
-  <textarea wysihtml5 id="editable" class="form-control" name="editable" stylesheets="stylesheets">
+  <textarea wysihtml5 id="editable" class="form-control" name="editable" stylesheets="stylesheets" data="data">
   </textarea>
 
   <script src="/components/angular/angular.js"></script>
@@ -35,6 +35,7 @@
           "/components/common-style/dist/css/alignment.min.css",
           "/dist/css/bootstrap3-wysihtml5-line-height.min.css"
         ];
+        $scope.data = "This is some test data.";
       }]);
   </script>
 </body>
