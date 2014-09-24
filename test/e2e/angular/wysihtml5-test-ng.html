@@ -11,7 +11,8 @@
 </head>
 
 <body ng-app="testApp" ng-controller="mainController">
-  <textarea wysihtml5 id="editable" class="form-control" name="editable" stylesheets="stylesheets" data="data">
+  <textarea wysihtml5 id="editable" class="form-control" name="editable" stylesheets="stylesheets"
+    data="settings.additionalParams.data" background="settings.additionalParams.background">
   </textarea>
 
   <script src="/components/angular/angular.js"></script>
@@ -23,9 +24,10 @@
   <script src="/components/bootstrap-form-components/dist/js/bootstrap-font-picker.js"></script>
   <script src="/components/bootstrap-form-components/dist/js/bootstrap-font-size-picker.js"></script>
   <script src="/components/widget-settings-ui-components/dist/js/widget-settings-ui-components.js"></script>
+  <script src="/components/widget-common/dist/common.js"></script>
   <script src="/components/wysihtml5/dist/wysihtml5-0.4.0pre.js"></script>
-  <script src="/dist/js/angular/dtv-bootstrap3-wysihtml5.min.js"></script>
-  <script src="/dist/js/bootstrap3-wysihtml5.min.js"></script>
+  <script src="/src/js/angular/dtv-bootstrap3-wysihtml5.js"></script>
+  <script src="/src/js/bootstrap3-wysihtml5.js"></script>
 
   <script type="text/javascript">
     angular.module("testApp", ["risevision.widget.common.wysihtml5"])
@@ -35,7 +37,13 @@
           "/components/common-style/dist/css/alignment.min.css",
           "/dist/css/bootstrap3-wysihtml5-line-height.min.css"
         ];
-        $scope.data = "This is some test data.";
+
+        $scope.settings = {
+          "additionalParams": {
+            "data": "This is some test data",
+            "background": "rgba(229, 229, 229, 1.0)"
+          }
+        };
       }]);
   </script>
 </body>
