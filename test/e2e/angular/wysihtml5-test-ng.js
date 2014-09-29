@@ -26,6 +26,9 @@
 
       expect(element(by.css(".emphasis .underline")).isPresent())
         .to.eventually.be.true;
+
+      expect(element(by.css(".emphasis .wysihtml5-command-active")).isPresent())
+        .to.eventually.be.false;
     });
 
     it("Should load alignment", function () {
