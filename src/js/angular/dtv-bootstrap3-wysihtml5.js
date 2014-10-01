@@ -9,8 +9,7 @@
       var $fontPicker, $backgroundColor;
 
       function link(scope, element) {
-        var hexString, rgb;
-        var backgroundColor, textColor, highlightColor;
+        var textColor, highlightColor;
         var standardFont, googleFont, customFont;
 
         $(element).wysihtml5({
@@ -22,22 +21,7 @@
         editor = $("#editable").data("wysihtml5").editor;
 
         editor.on("load", function() {
-          bind();
-
-          editor.setValue(scope.data);
-
-          // Set background color.
-          if (scope.background) {
-            backgroundColor = tinycolor(scope.background);
-            hexString = backgroundColor.toHexString();
-            rgb = backgroundColor.toRgb();
-
-            $backgroundColor.spectrum("set", backgroundColor);
-            editor.composer.commands.exec("backgroundColor", hexString, rgb, [{
-              name: "data-background-color",
-              value: backgroundColor.toRgbString()
-            }]);
-          }
+          bind(scope);
 
           $.each($(scope.data).find("span").andSelf(), function() {
             standardFont = $(this).attr("data-standard-font");
@@ -83,11 +67,12 @@
         });
       }
 
-      function bind() {
+      function bind(scope) {
         var node = null, parentNode = null;
         var isBold = false, isItalic = false, isUnderline = false;
         var font = "", fontSize = "", lineHeight = "";
-        var color = "", highlightColor = "";
+        var color = "", highlightColor = "", backgroundColor = null;
+        var hexString = "", rgb = null;
         var $fontStyle, $fontSizePicker;
         var $textColor, $highlightColor;
 
@@ -97,6 +82,28 @@
         $highlightColor = $(".highlight-color");
 
         // Add event handlers.
+        scope.$on("collectAdditionalParams", function () {
+          scope.data = editor.getValue();
+          scope.background = editor.composer.doc.body.getAttribute("data-background-color");
+        });
+
+        scope.$on("loadAdditionalParams", function (e, additionalParams) {
+          editor.setValue(additionalParams.data);
+
+          // Set background color.
+          if (additionalParams.background) {
+            backgroundColor = tinycolor(additionalParams.background);
+            hexString = backgroundColor.toHexString();
+            rgb = backgroundColor.toRgb();
+
+            $backgroundColor.spectrum("set", backgroundColor);
+            editor.composer.commands.exec("backgroundColor", hexString, rgb, [{
+              name: "data-background-color",
+              value: backgroundColor.toRgbString()
+            }]);
+          }
+        });
+
         $(".font-picker").on("show.bfhselectbox", function() {
           closeDropdowns();
         });
