@@ -8,12 +8,12 @@
       var editor = null;
       var $fontPicker, $backgroundColor;
 
-      function link(scope, element) {
+      function link($scope, element) {
         var textColor, highlightColor;
         var standardFont, googleFont, customFont;
 
         $(element).wysihtml5({
-          "stylesheets": scope.stylesheets
+          "stylesheets": $scope.stylesheets
         });
 
         $fontPicker = $(".font-picker");
@@ -21,9 +21,9 @@
         editor = $("#editable").data("wysihtml5").editor;
 
         editor.on("load", function() {
-          bind(scope);
+          bind($scope);
 
-          $.each($(scope.data).find("span").andSelf(), function() {
+          $.each($($scope.data).find("span").andSelf(), function() {
             standardFont = $(this).attr("data-standard-font");
             googleFont = $(this).attr("data-google-font");
             customFont = $(this).attr("data-custom-font");
@@ -67,7 +67,7 @@
         });
       }
 
-      function bind(scope) {
+      function bind($scope) {
         var node = null, parentNode = null;
         var isBold = false, isItalic = false, isUnderline = false;
         var font = "", fontSize = "", lineHeight = "";
@@ -82,12 +82,12 @@
         $highlightColor = $(".highlight-color");
 
         // Add event handlers.
-        scope.$on("collectAdditionalParams", function () {
-          scope.data = editor.getValue();
-          scope.background = editor.composer.doc.body.getAttribute("data-background-color");
+        $scope.$on("collectAdditionalParams", function() {
+          $scope.setAdditionalParam("data", editor.getValue());
+          $scope.setAdditionalParam("background", editor.composer.doc.body.getAttribute("data-background-color"));
         });
 
-        scope.$on("loadAdditionalParams", function (e, additionalParams) {
+        $scope.$on("loadAdditionalParams", function (e, additionalParams) {
           editor.setValue(additionalParams.data);
 
           // Set background color.
