@@ -83,8 +83,8 @@
 
         // Add event handlers.
         $scope.$on("collectAdditionalParams", function() {
-          $scope.setAdditionalParam("data", editor.getValue());
-          $scope.setAdditionalParam("background", editor.composer.doc.body.getAttribute("data-background-color"));
+          $scope.$parent.setAdditionalParam("data", editor.getValue());
+          $scope.$parent.setAdditionalParam("background", editor.composer.doc.body.getAttribute("data-background-color"));
         });
 
         $scope.$on("loadAdditionalParams", function (e, additionalParams) {
