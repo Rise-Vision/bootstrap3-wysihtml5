@@ -6,45 +6,100 @@
   <link rel="stylesheet" href="/components/rv-bootstrap-formhelpers/dist/css/rv-bootstrap-formhelpers.min.css">
   <link rel="stylesheet" href="/components/bootstrap-select/bootstrap-select.min.css">
   <link rel="stylesheet" href="/dist/css/bootstrap3-wysihtml5.min.css">
+
   <style>
-</style>
+    .wysihtml5-sandbox {
+      min-height: 50%;
+    }
+  </style>
 </head>
 
-<body ng-app="testApp" ng-controller="mainController">
-  <textarea wysihtml5 id="editable" class="form-control" name="editable" stylesheets="stylesheets"
-    data="settings.additionalParams.data" background="settings.additionalParams.background">
-  </textarea>
+<body ng-app="testApp">
+  <div class="widget">
+    <div class="overlay"></div>
+    <div class="settings">
+      <div class="settings-center">
+        <div class="wrapper container modal-content" ng-controller="mainController">
+          <div class="modal-header">
+            <h2 id="settings-title">e2e Testing</h2>
+          </div>
+          <form role="form" name="settingsform">
+            <textarea wysihtml5 id="editable" class="form-control" name="editable" stylesheets="stylesheets"
+              data="settings.additionalParams.data" background="settings.additionalParams.background">
+            </textarea>
+          </form>
+          <button id="additional-params" type="button" class="btn btn-default" ng-click="loadAdditionalParams()">Load additionalParams</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <script src="/components/angular/angular.js"></script>
-  <script src="/components/jquery/dist/jquery.js"></script>
-  <script src="/components/spectrum/spectrum.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+
   <script src="/components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
   <script src="/components/rv-bootstrap-formhelpers/dist/js/rv-bootstrap-formhelpers.js"></script>
   <script src="/components/bootstrap-select/bootstrap-select.min.js"></script>
   <script src="/components/bootstrap-form-components/dist/js/bootstrap-font-picker.js"></script>
   <script src="/components/bootstrap-form-components/dist/js/bootstrap-font-size-picker.js"></script>
+  <script src="/components/spectrum/spectrum.js"></script>
   <script src="/components/widget-settings-ui-components/dist/js/widget-settings-ui-components.js"></script>
-  <script src="/components/widget-common/dist/common.js"></script>
   <script src="/components/wysihtml5/dist/wysihtml5-0.4.0pre.js"></script>
-  <script src="/src/js/angular/dtv-bootstrap3-wysihtml5.js"></script>
   <script src="/src/js/bootstrap3-wysihtml5.js"></script>
+  <script src="/src/js/angular/dtv-bootstrap3-wysihtml5.js"></script>
+  <script src="/components/widget-common/dist/common.js"></script>
 
   <script type="text/javascript">
-    angular.module("testApp", ["risevision.widget.common.wysihtml5"])
-      .controller("mainController", ["$scope", function ($scope) {
-        $scope.stylesheets = [
-          "/components/bootstrap-form-components/dist/css/all.min.css",
-          "/components/common-style/dist/css/alignment.min.css",
-          "/dist/css/bootstrap3-wysihtml5-line-height.min.css"
-        ];
+    angular.module("testApp", [
+      "risevision.widget.common.wysihtml5"
+    ]);
 
-        $scope.settings = {
-          "additionalParams": {
-            "data": "This is some test data",
-            "background": "rgba(229, 229, 229, 1.0)"
-          }
-        };
-      }]);
+    angular.module("testApp")
+      .controller("mainController", ["$scope",
+        function ($scope) {
+          $scope.settings = {
+            "params": {},
+            "additionalParams": {}
+          };
+          $scope.stylesheets = [
+            "/components/bootstrap-form-components/dist/css/all.min.css",
+            "/components/common-style/dist/css/alignment.min.css",
+            "/dist/css/bootstrap3-wysihtml5-line-height.min.css"
+          ];
+
+          $scope.loadAdditionalParams = function() {
+            var additionalParams = {
+              "data": "<span class='wysiwyg-font-family-annie-use-your-telescope'"
+                + "data-google-font='Annie Use Your Telescope'>Bacon</span> "
+                + "ipsum dolor sit amet beef ribs pork belly meatloaf,"
+                + "shank tenderloin bacon ground round leberkas tri-tip doner "
+                + "meatball pancetta pork loin t-bone. Sirloin leberkas "
+                + "tenderloin, frankfurter prosciutto ham pork belly tongue "
+                + "beef shank beef ribs pork loin sausage bacon turducken. "
+                + "Hamburger salami prosciutto beef drumstick corned beef "
+                + "chuck. Doner brisket shankle ground round porchetta biltong"
+                + "kevin, pork chop filet mignon sausage landjaeger pancetta. "
+                + "Meatloaf beef pork filet mignon bresaola, shoulder shank "
+                + "pastrami <span class='wysiwyg-font-family-brushscriptstd' "
+                +" data-custom-font='BrushScriptStd' data-custom-font-url='"
+                + "https://s3.amazonaws.com/Donna/fonts/BrushScriptStd.otf'>"
+                + "porchetta</span>.",
+              "background": "rgba(229, 229, 229, 1)"
+            }
+
+            $scope.settings.additionalParams = additionalParams;
+            $scope.$broadcast("loadAdditionalParams", additionalParams);
+          };
+
+          $scope.collectAdditionalParams = function() {
+            $scope.$broadcast("collectAdditionalParams");
+          };
+
+          $scope.setAdditionalParam = function (name, val) {
+            $scope.settings.additionalParams[name] = val;
+          };
+        }
+      ]);
   </script>
 </body>
 </html>

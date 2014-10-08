@@ -7,10 +7,11 @@
     .directive("wysihtml5", function () {
       var editor = null;
       var $fontPicker, $backgroundColor;
+      var isEditorLoaded = false, isParamsLoaded = false;
+      var params;
 
       function link($scope, element) {
-        var textColor, highlightColor;
-        var standardFont, googleFont, customFont;
+        var backgroundColor = null, hexString = "", rgb = null;
 
         $(element).wysihtml5({
           "stylesheets": $scope.stylesheets
@@ -20,10 +21,51 @@
         $backgroundColor = $(".background-color");
         editor = $("#editable").data("wysihtml5").editor;
 
-        editor.on("load", function() {
-          bind($scope);
+        // Add event handlers.
+        $scope.$on("loadAdditionalParams", function (e, additionalParams) {
+          isParamsLoaded = true;
+          params = additionalParams;
 
-          $.each($($scope.data).find("span").andSelf(), function() {
+          editor.setValue(additionalParams.data);
+
+          // Set background color.
+          if (additionalParams.background) {
+            backgroundColor = tinycolor(additionalParams.background);
+            hexString = backgroundColor.toHexString();
+            rgb = backgroundColor.toRgb();
+
+            $backgroundColor.spectrum("set", backgroundColor);
+            editor.composer.commands.exec("backgroundColor", hexString, rgb, [{
+              name: "data-background-color",
+              value: backgroundColor.toRgbString()
+            }]);
+          }
+
+          initEditor();
+        });
+
+        $scope.$on("collectAdditionalParams", function() {
+          backgroundColor = editor.composer.doc.body
+            .getAttribute("data-background-color");
+
+          $scope.$parent.setAdditionalParam("data", editor.getValue());
+          $scope.$parent.setAdditionalParam("background",
+            backgroundColor ? backgroundColor : "");
+        });
+
+        editor.on("load", function() {
+          isEditorLoaded = true;
+          bind();
+          initEditor();
+        });
+      }
+
+      function initEditor() {
+        var textColor, highlightColor;
+        var standardFont, googleFont, customFont;
+
+        if (isEditorLoaded && isParamsLoaded) {
+          $.each($(params.data).find("span").addBack(), function() {
             standardFont = $(this).attr("data-standard-font");
             googleFont = $(this).attr("data-google-font");
             customFont = $(this).attr("data-custom-font");
@@ -64,15 +106,14 @@
               editor.composer.commands.exec("highlightColor", highlightColor);
             }
           });
-        });
+        }
       }
 
-      function bind($scope) {
+      function bind() {
         var node = null, parentNode = null;
         var isBold = false, isItalic = false, isUnderline = false;
         var font = "", fontSize = "", lineHeight = "";
-        var color = "", highlightColor = "", backgroundColor = null;
-        var hexString = "", rgb = null;
+        var color = "", highlightColor = "";
         var $fontStyle, $fontSizePicker;
         var $textColor, $highlightColor;
 
@@ -81,33 +122,7 @@
         $textColor = $(".text-color");
         $highlightColor = $(".highlight-color");
 
-        // Add event handlers.
-        $scope.$on("collectAdditionalParams", function() {
-          var backgroundColor = editor.composer.doc.body
-            .getAttribute("data-background-color");
-
-          $scope.$parent.setAdditionalParam("data", editor.getValue());
-          $scope.$parent.setAdditionalParam("background",
-            backgroundColor ? backgroundColor : "");
-        });
-
-        $scope.$on("loadAdditionalParams", function (e, additionalParams) {
-          editor.setValue(additionalParams.data);
-
-          // Set background color.
-          if (additionalParams.background) {
-            backgroundColor = tinycolor(additionalParams.background);
-            hexString = backgroundColor.toHexString();
-            rgb = backgroundColor.toRgb();
-
-            $backgroundColor.spectrum("set", backgroundColor);
-            editor.composer.commands.exec("backgroundColor", hexString, rgb, [{
-              name: "data-background-color",
-              value: backgroundColor.toRgbString()
-            }]);
-          }
-        });
-
+        // Add event handlers to toolbar and editor.
         $(".font-picker").on("show.bfhselectbox", function() {
           closeDropdowns();
         });
