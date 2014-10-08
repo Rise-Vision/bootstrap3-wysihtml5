@@ -616,23 +616,23 @@
     $.fn.wysihtml5.Constructor = Wysihtml5;
 
     var defaultOptions = $.fn.wysihtml5.defaultOptions = {
-        /* Donna Start */
+        /* Donna Start - Defines order of toolbar icons. */
+        "font": true,
+        "font-size": true,
+        "emphasis": true,
         "alignment": true,
+        "line-height": true,
+        "highlight-color": true,
+        "text-color": true,
         "background-color": true,
         "clear": true,
         "color": false,
-        "emphasis": true,
-        "font": true,
-        "font-size": true,
         "font-styles": false,
-        "highlight-color": true,
         "html": false,
         "image": false,
-        "line-height": true,
         "link": false,
         "lists": false,
         "size": 'sm',
-        "text-color": true,
         /* Donna End */
         events: {},
         parserRules: {
