@@ -36,6 +36,6 @@
     "jQuery": "~1.11.1",
     "widget-common": "https://github.com/Rise-Vision/widget-common.git",
     "widget-settings-ui-components": "https://github.com/Rise-Vision/widget-settings-ui-components.git",
-    "wysihtml5": "https://github.com/Rise-Vision/wysihtml5.git#0.3.9-rv"
+    "wysihtml5": "https://github.com/Rise-Vision/wysihtml5.git#0.4-rv"
   }
 }

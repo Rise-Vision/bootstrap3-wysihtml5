@@ -6,12 +6,12 @@
   angular.module("risevision.widget.common.wysihtml5", [])
     .directive("wysihtml5", function () {
       var editor = null;
-      var $fontPicker, $backgroundColor;
+      var $fontPicker, $backgroundColor, $textColor, $highlightColor;
       var isEditorLoaded = false, isParamsLoaded = false;
       var params;
 
       function link($scope, element) {
-        var backgroundColor = null, hexString = "", rgb = null;
+        var backgroundColor = null, rgba = null;
 
         $(element).wysihtml5({
           "stylesheets": $scope.stylesheets
@@ -19,6 +19,8 @@
 
         $fontPicker = $(".font-picker");
         $backgroundColor = $(".background-color");
+        $textColor = $(".text-color");
+        $highlightColor = $(".highlight-color");
         editor = $("#editable").data("wysihtml5").editor;
 
         // Add event handlers.
@@ -31,14 +33,14 @@
           // Set background color.
           if (additionalParams.background) {
             backgroundColor = tinycolor(additionalParams.background);
-            hexString = backgroundColor.toHexString();
-            rgb = backgroundColor.toRgb();
+            rgba = backgroundColor.toRgb();
 
             $backgroundColor.spectrum("set", backgroundColor);
-            editor.composer.commands.exec("backgroundColor", hexString, rgb, [{
-              name: "data-background-color",
-              value: backgroundColor.toRgbString()
-            }]);
+
+            editor.composer.commands.exec("backgroundColor", rgba, [{
+                name: "data-background-color",
+                value: backgroundColor.toRgbString()
+              }]);
           }
 
           initEditor();
@@ -99,11 +101,18 @@
 
             // Add CSS for colors.
             if (textColor) {
-              editor.composer.commands.exec("textColor", textColor);
+              // Use color picker as an intermediary to get the color as an
+              // object for passing to the editor command.
+              $textColor.spectrum("set", textColor);
+              editor.composer.commands.exec("textColor",
+                $textColor.spectrum("get").toRgb());
             }
 
             if (highlightColor) {
-              editor.composer.commands.exec("highlightColor", highlightColor);
+              // Use color picker as an intermediary.
+              $highlightColor.spectrum("set", highlightColor);
+              editor.composer.commands.exec("highlightColor",
+                $highlightColor.spectrum("get").toRgb());
             }
           });
         }
@@ -115,12 +124,9 @@
         var font = "", fontSize = "", lineHeight = "";
         var color = "", highlightColor = "";
         var $fontStyle, $fontSizePicker;
-        var $textColor, $highlightColor;
 
         $fontStyle = $(".emphasis");
         $fontSizePicker = $(".font-size-picker");
-        $textColor = $(".text-color");
-        $highlightColor = $(".highlight-color");
 
         // Add event handlers to toolbar and editor.
         $(".font-picker").on("show.bfhselectbox", function() {
