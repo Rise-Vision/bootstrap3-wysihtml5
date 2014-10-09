@@ -561,10 +561,9 @@
             showInput: true,
             type: options.type,
             change: function(color) {
-              var hexString = color.toHexString();
-              var rgb = color.toRgb();
+              var rgba = color.toRgb();
 
-              self.editor.composer.commands.exec(options.command, hexString, rgb, [{
+              self.editor.composer.commands.exec(options.command, rgba, [{
                 name: options.attribute,
                 value: color.toRgbString()
               }]);
