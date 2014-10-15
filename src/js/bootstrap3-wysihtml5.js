@@ -273,6 +273,10 @@
                       this.initAlignment(toolbar);
                     }
 
+                    if (key === "clear") {
+                      this.initClear(toolbar);
+                    }
+
                     if (key === "font") {
                         this.initFont(toolbar);
                     }
@@ -493,6 +497,26 @@
         /* Donna Start */
         initAlignment: function(toolbar) {
           toolbar.find(".alignment").alignment();
+        },
+
+        // Reset all toolbar icons.
+        initClear: function(toolbar) {
+          toolbar.find(".clear").on("click", function() {
+            toolbar.find(".font-picker").data("plugin_fontPicker")
+              .reset();
+            toolbar.find(".font-size-picker").data("plugin_fontSizePicker")
+              .reset();
+            toolbar.find(".emphasis").data("plugin_fontStyle")
+              .reset();
+            toolbar.find(".alignment").data("plugin_alignment")
+              .reset();
+            toolbar.find(".line-height a[data-wysihtml5-command-value='1']")
+              .trigger("click");
+
+            toolbar.find(".text-color").spectrum("set", "#000");
+            toolbar.find(".highlight-color").spectrum("set", "transparent");
+            toolbar.find(".background-color").spectrum("set", "#fff");
+          });
         },
 
         initFont: function(toolbar) {
