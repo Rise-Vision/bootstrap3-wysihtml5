@@ -121,12 +121,11 @@
       function bind() {
         var node = null, parentNode = null;
         var isBold = false, isItalic = false, isUnderline = false;
-        var font = "", fontSize = "", lineHeight = "";
+        var font = "", fontSize = "", alignment = "", lineHeight = "";
         var color = "", highlightColor = "";
-        var $fontStyle, $fontSizePicker;
-
-        $fontStyle = $(".emphasis");
-        $fontSizePicker = $(".font-size-picker");
+        var $fontStyle = $(".emphasis")
+        var $fontSizePicker = $(".font-size-picker");
+        var $alignment = $(".alignment");
 
         // Add event handlers to toolbar and editor.
         $(".font-picker").on("show.bfhselectbox", function() {
@@ -188,6 +187,15 @@
                 if (fontSize) {
                   $fontSizePicker.data("plugin_fontSizePicker")
                     .setFontSize(fontSize);
+                }
+
+                // Alignment
+                alignment = window.getComputedStyle(parentNode, null)
+                  .getPropertyValue("text-align");
+
+                if (alignment) {
+                  $alignment.data("plugin_alignment")
+                    .setAlignment(alignment);
                 }
 
                 // Line Height
