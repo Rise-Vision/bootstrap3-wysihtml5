@@ -67,7 +67,7 @@
         var standardFont, googleFont, customFont;
 
         if (isEditorLoaded && isParamsLoaded) {
-          $.each($(params.data).find("span").addBack(), function() {
+          $.each($("<div/>").html(params.data).find("span").addBack(), function() {
             standardFont = $(this).attr("data-standard-font");
             googleFont = $(this).attr("data-google-font");
             customFont = $(this).attr("data-custom-font");
@@ -220,15 +220,16 @@
                 }
               }
               else {
-                // Reset font style.
-                $fontStyle.data("plugin_fontStyle").setStyles({
-                  "bold": false,
-                  "italic": false,
-                  "underline": false
-                });
+                // Reset all toolbar icons.
+                $fontPicker.data("plugin_fontPicker").reset();
+                $fontSizePicker.data("plugin_fontSizePicker").reset();
+                $fontStyle.data("plugin_fontStyle").reset();
+                $alignment.data("plugin_alignment").reset();
+                $(".line-height a[data-wysihtml5-command-value='1']")
+                  .trigger("click");
 
-                // Reset line height.
-                $(".line-height button").data("wysihtml5-command-value", 1);
+                $textColor.spectrum("set", "#000");
+                $highlightColor.spectrum("set", "transparent");
               }
             }
           }
