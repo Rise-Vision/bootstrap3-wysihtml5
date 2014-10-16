@@ -502,6 +502,9 @@
         // Reset all toolbar icons.
         initClear: function(toolbar) {
           toolbar.find(".clear").on("click", function() {
+            var backgroundColor = tinycolor("#fff");
+            var rgba = backgroundColor.toRgb();
+
             toolbar.find(".font-picker").data("plugin_fontPicker")
               .reset();
             toolbar.find(".font-size-picker").data("plugin_fontSizePicker")
@@ -516,6 +519,11 @@
             toolbar.find(".text-color").spectrum("set", "#000");
             toolbar.find(".highlight-color").spectrum("set", "transparent");
             toolbar.find(".background-color").spectrum("set", "#fff");
+
+            self.editor.composer.commands.exec("backgroundColor", rgba, [{
+              name: "data-background-color",
+              value: backgroundColor.toRgbString()
+            }]);
           });
         },
 
