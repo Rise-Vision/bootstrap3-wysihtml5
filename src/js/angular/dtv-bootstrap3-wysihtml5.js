@@ -229,7 +229,7 @@
                   .trigger("click");
 
                 $textColor.spectrum("set", "#000");
-                $highlightColor.spectrum("set", "transparent");
+                $highlightColor.spectrum("set", "#fff");
               }
             }
           }
