@@ -303,7 +303,7 @@
                         this.initColorPicker(toolbar, {
                           elem: '.highlight-color',
                           type: 'highlight',
-                          color: 'transparent',
+                          color: '#fff',
                           command: 'highlightColor',
                           attribute: 'data-highlight-color'
                         });
@@ -517,7 +517,7 @@
               .trigger("click");
 
             toolbar.find(".text-color").spectrum("set", "#000");
-            toolbar.find(".highlight-color").spectrum("set", "transparent");
+            toolbar.find(".highlight-color").spectrum("set", "#fff");
             toolbar.find(".background-color").spectrum("set", "#fff");
 
             self.editor.composer.commands.exec("backgroundColor", rgba, [{
