@@ -193,6 +193,10 @@
                 alignment = window.getComputedStyle(parentNode, null)
                   .getPropertyValue("text-align");
 
+                // Check if alignment is one of the supported values.
+                alignment = $.inArray(alignment, ["left", "center", "right", "justify"]) === -1
+                  ? "left" : alignment;
+
                 if (alignment) {
                   $alignment.data("plugin_alignment")
                     .setAlignment(alignment);
@@ -225,9 +229,7 @@
                 $fontSizePicker.data("plugin_fontSizePicker").reset();
                 $fontStyle.data("plugin_fontStyle").reset();
                 $alignment.data("plugin_alignment").reset();
-                $(".line-height a[data-wysihtml5-command-value='1']")
-                  .trigger("click");
-
+                $(".line-height button").data("wysihtml5-command-value", "1");
                 $textColor.spectrum("set", "#000");
                 $highlightColor.spectrum("set", "#fff");
               }
