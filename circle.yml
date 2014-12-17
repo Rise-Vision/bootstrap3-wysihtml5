@@ -1,0 +1,10 @@
+dependencies:
+  pre:
+    - npm install -g gulp
+  post:
+    - bower install
+    - wget http://selenium-release.storage.googleapis.com/2.44/selenium-server-standalone-2.44.0.jar
+    - nohup bash -c "java -jar selenium-server-standalone-2.44.0.jar &"
+test:
+  override:
+    - npm run test
